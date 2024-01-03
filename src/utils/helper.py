@@ -9,7 +9,7 @@ __email__ = 'Email'
 import sys
 import logging
 # private
-from src.methods import base
+from src.methods import base, sentence_transformers
 
 
 def str2bool(v):
@@ -41,5 +41,7 @@ def get_model(config):
     match config.method:
         case 'base':
             return base.Model()
+        case 'sentence-transformers':
+            return sentence_transformers.Model(config.model_name)
         case _:
             raise NotImplementedError

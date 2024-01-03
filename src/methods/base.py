@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-__author__ = 'Author'
-__email__ = 'Email'
+__author__ = 'Hadi Sheikhi'
+__email__ = 'hsheikhi@ualberta.ca'
 
 
 # dependency

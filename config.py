@@ -20,7 +20,9 @@ def init_args():
     parser.add_argument('--tgt_lan', type=str, default='eng', choices=['eng'])
     # method
     # base for the official baseline method
-    parser.add_argument('--method', type=str, default='base', choices=['base'])
+    parser.add_argument('--method', type=str, default='base', choices=['base', "sentence-transformers"])
+    #sentence transformer model name
+    parser.add_argument("--model_name", type=str, default="distiluse-base-multilingual-cased-v2")
     # save as argparse space
     return parser.parse_known_args()[0]
 
@@ -54,4 +56,4 @@ class Config(object):
             self.RESOURCE_PATH, 'results', self.track, self.tgt_lan, self.method
             )
         os.makedirs(self.RESULTS_PATH, exist_ok=True)
-        self.RESULTS_CSV = os.path.join(self.RESULTS_PATH, f'{self.seed}.csv')
+        self.RESULTS_CSV = os.path.join(self.RESULTS_PATH, f'pred_{self.tgt_lan}_{self.track}_{self.seed}.csv')
