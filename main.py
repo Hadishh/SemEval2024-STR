@@ -41,7 +41,7 @@ class SR(object):
     def dev(self):
         self.logger.info('='*5 + 'Dev' + '='*5)
         # read in dev datasets
-        raw_df = pd.read_csv(self.config.DEV_CSV)
+        raw_df = pd.read_csv(self.config.DEV_CSV, encoding="utf-8")
         xs1, xs2 = map(list, zip(*[tuple(row['Text'].split('\n')) for idx, row in raw_df.iterrows()]))
         self.logger.info('Data loaded.')
         # model to predict

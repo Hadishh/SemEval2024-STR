@@ -17,7 +17,7 @@ def init_args():
     # tracks
     parser.add_argument('--track', type=str, default='a', choices=['a', 'b', 'c'])
     # target languages
-    parser.add_argument('--tgt_lan', type=str, default='eng', choices=['eng'])
+    parser.add_argument('--tgt_lan', type=str, default='eng', choices=['eng', "arq", "esp", "ary", "hin", "pan", "arb", "kin", "ind", "hau", "amh", "afr"])
     # method
     # base for the official baseline method
     parser.add_argument('--method', type=str, default='base', choices=['base', "sentence-transformers"])
