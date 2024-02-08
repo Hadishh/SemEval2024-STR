@@ -45,10 +45,15 @@ class Config(object):
         self.DATA_PATH = os.path.join(self.RESOURCE_PATH, 'data')
         self.TRACK_PATH = os.path.join(self.DATA_PATH, self.track)
         self.LAN_PATH = os.path.join(self.TRACK_PATH, self.tgt_lan)
-        self.TRAIN_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_train.csv')
+        self.TRANS_PATH = os.path.join(self.DATA_PATH, "translations")
+        # self.TRAIN_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_train.csv')
         # self.DEV_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_dev.csv')
-        self.DEV_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_dev.csv')
-        self.TEST_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_test.csv')
+        self.DEV_CSV = os.path.join(self.TRANS_PATH, f'{self.tgt_lan}2eng_dev.csv')
+        self.TEST_CSV = os.path.join(self.TRANS_PATH, f'{self.tgt_lan}2eng_test.csv')
+        
+        if self.tgt_lan == "eng":
+            self.DEV_CSV = os.path.join(self.TRANS_PATH, f'{self.tgt_lan}_dev.csv')
+            self.TEST_CSV = os.path.join(self.TRANS_PATH, f'{self.tgt_lan}_test.csv')
         self.LOG_PATH = os.path.join(
             self.RESOURCE_PATH, 'log', self.track, self.tgt_lan, self.method, str(self.seed)
             )
@@ -60,5 +65,5 @@ class Config(object):
             self.RESOURCE_PATH, 'results', self.track, self.tgt_lan, self.method
             )
         os.makedirs(self.RESULTS_PATH, exist_ok=True)
-        self.RESULTS_DEV_CSV = os.path.join(self.RESULTS_PATH, f'pred_{self.tgt_lan}_{self.track}_dev.csv')
-        self.RESULTS_TEST_CSV = os.path.join(self.RESULTS_PATH, f'pred_{self.tgt_lan}_{self.track}_test.csv')
+        self.RESULTS_DEV_CSV = os.path.join(self.RESULTS_PATH, f'{self.tgt_lan}2eng_dev.csv')
+        self.RESULTS_TEST_CSV = os.path.join(self.RESULTS_PATH, f'{self.tgt_lan}2eng_test.csv')
