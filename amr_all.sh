@@ -1,0 +1,1 @@
+ptyhon -m main --method amr --track b --tgt_lan amh --translate_lang eng --seed 0

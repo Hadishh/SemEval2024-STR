@@ -10,8 +10,8 @@ class AMR(object):
     """
     def __init__(self, config, src_lang, tgt_lang, batch_size=32):
         super(AMR, self).__init__()
-        self.source_language = src_lang
-        self.target_langauge = tgt_lang
+        self.source_language = config.tgt_lan
+        self.target_langauge = config.translate_lang
         self.batch_size = batch_size
         self.config = config
         self.lang_dict = {"amh" : "am", 
