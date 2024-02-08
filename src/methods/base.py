@@ -25,4 +25,4 @@ class Model(object):
         return round(dice_coef, 2)
 
     def predict(self, s1s, s2s):
-        return [self.dice_score(s1, s2) for s1, s2 in zip(s1s, s2s)]
+        return [self.dice_score(s1, s2) for s1, s2 in zip(s1s, s2s)], None

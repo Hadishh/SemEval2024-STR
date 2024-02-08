@@ -62,9 +62,7 @@ class AMR(object):
             else:
                 data.append({"s1": s1, "amr1": amr1, "s2": s2, "amr2": amr2, "score": f})
             scores.append(f)
-        df = pd.DataFrame(data)
-        df.to_csv(os.path.join(self.config.RESULTS_PATH, "metadata.csv"), index=None)
-        return scores
+        return scores, data
     
     def __get_amr(self, s):
         params= {"sentence": s}

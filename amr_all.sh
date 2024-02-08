@@ -1,1 +1,9 @@
-ptyhon -m main --method amr --track b --tgt_lan amh --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan eng --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan esp --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan arq --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan ary --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan amh --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan hau --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan kin --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan mar --translate_lang eng --seed 0
+python -m main --method amr --track b --tgt_lan tel --translate_lang eng --seed 0

@@ -62,4 +62,4 @@ class Model(object):
         embeddings1 = self.model.encode(s1s, batch_size=self.batch_size)
         embeddings2 = self.model.encode(s2s, batch_size=self.batch_size)
         
-        return [self.distance(s1, s2) for (s1, s2) in zip(s1s, s2s)]
+        return [self.distance(s1, s2) for (s1, s2) in zip(s1s, s2s)], None

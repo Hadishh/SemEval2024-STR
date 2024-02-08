@@ -10,6 +10,7 @@ class AMR(object):
     """
     def __init__(self, config):
         super(AMR, self).__init__()
+        self.config = config
 
     def smatch_score(self, s1, s2):
         amr1 = self.__get_amr(s1)
@@ -21,13 +22,11 @@ class AMR(object):
     def predict(self, s1s, s2s):
         scores = []
         data = []
-        for s1, s2 in tqdm(zip(s1s, s2s)):
+        for s1, s2 in zip(tqdm(s1s[:2]), s2s[:2]):
             score, amr1, amr2 = self.smatch_score(s1, s2)
             scores.append(score)
-            data.append({"s1": s1, "amr1": amr1, "s2": s2, "amr2": amr2, "score": score})
-        df = pd.DataFrame(data)
-        df.to_csv(os.path.join(self.config.RESULTS_PATH, "metadata.csv"), index=None)
-        return scores
+            data.append({"s1": s1, "amr1": amr1, "s2": s2, "amr2": amr2, "score": score})  
+        return scores, data
     
     def __get_amr(self, s):
         params= {"sentence": s}

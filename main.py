@@ -38,16 +38,18 @@ class SR(object):
         # get model
         self.model = helper.get_model(self.config)
     
-    def __inference(self, input_csv, output_csv):
+    def __inference(self, input_csv, output_csv, split):
         raw_df = pd.read_csv(input_csv, encoding="utf-8")
         if self.config.tgt_lan == "eng":
-            xs1, xs2 = map(list, zip(*[tuple(row['Text'].split('\t')) for idx, row in raw_df.iterrows()]))
+            xs1, xs2 = map(list, zip(*[tuple(row['Text'].split('\n')) for idx, row in raw_df.iterrows()]))
         else:
             xs1, xs2 = map(list, zip(*[(row['Text1 Translation'], row['Text2 Translation']) for idx, row in raw_df.iterrows()]))
         
         self.logger.info('Data loaded.')
         # model to predict
-        ys_= self.model.predict(xs1, xs2)
+        ys_, metadata = self.model.predict(xs1, xs2)
+        df = pd.DataFrame(metadata)
+        df.to_csv(os.path.join(self.config.RESULTS_PATH, f"{split}_metadata.csv"), index=None)
         # Submission file has two columns: 'PairID' and 'Pred_Score'
         raw_df['Pred_Score'] = ys_
         raw_df[['PairID', 'Pred_Score']].to_csv(
@@ -60,11 +62,11 @@ class SR(object):
     
     def dev(self):
         self.logger.info('='*5 + 'Dev' + '='*5)
-        self.__inference(self.config.DEV_CSV, self.config.RESULTS_DEV_CSV)
+        self.__inference(self.config.DEV_CSV, self.config.RESULTS_DEV_CSV, "dev")
     
     def test(self):
         self.logger.info('='*5 + 'TEST' + '='*5)
-        self.__inference(self.config.TEST_CSV, self.config.RESULTS_TEST_CSV)
+        self.__inference(self.config.TEST_CSV, self.config.RESULTS_TEST_CSV, "test")
     
 def main():
     sr = SR()
