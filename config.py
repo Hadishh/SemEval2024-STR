@@ -60,4 +60,5 @@ class Config(object):
             self.RESOURCE_PATH, 'results', self.track, self.tgt_lan, self.method
             )
         os.makedirs(self.RESULTS_PATH, exist_ok=True)
-        self.RESULTS_CSV = os.path.join(self.RESULTS_PATH, f'pred_{self.tgt_lan}_{self.track}_{self.seed}.csv')
+        self.RESULTS_DEV_CSV = os.path.join(self.RESULTS_PATH, f'pred_{self.tgt_lan}_{self.track}_dev.csv')
+        self.RESULTS_TEST_CSV = os.path.join(self.RESULTS_PATH, f'pred_{self.tgt_lan}_{self.track}_test.csv')
