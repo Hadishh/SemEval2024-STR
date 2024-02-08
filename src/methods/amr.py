@@ -22,7 +22,7 @@ class AMR(object):
     def predict(self, s1s, s2s):
         scores = []
         data = []
-        for s1, s2 in zip(tqdm(s1s[:2]), s2s[:2]):
+        for s1, s2 in zip(tqdm(s1s), s2s):
             score, amr1, amr2 = self.smatch_score(s1, s2)
             scores.append(score)
             data.append({"s1": s1, "amr1": amr1, "s2": s2, "amr2": amr2, "score": score})  
