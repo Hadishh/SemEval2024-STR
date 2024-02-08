@@ -42,8 +42,8 @@ class SR(object):
         self.logger.info('='*5 + 'Dev' + '='*5)
         # read in dev datasets
         raw_df = pd.read_csv(self.config.DEV_CSV, encoding="utf-8")
-        xs1, xs2 = map(list, zip(*[tuple(row['Text'].split('\t')) for idx, row in raw_df.iterrows()]))
-        # xs1, xs2 = map(list, zip(*[(row['Text1 Translation'], row['Text2 Translation']) for idx, row in raw_df.iterrows()]))
+        # xs1, xs2 = map(list, zip(*[tuple(row['Text'].split('\t')) for idx, row in raw_df.iterrows()]))
+        xs1, xs2 = map(list, zip(*[(row['Text1 Translation'], row['Text2 Translation']) for idx, row in raw_df.iterrows()]))
         self.logger.info('Data loaded.')
         # model to predict
         ys_, s1s, s2s = self.model.predict(xs1, xs2)
@@ -60,7 +60,26 @@ class SR(object):
             )
         self.logger.info('Results saved as {}.'.format(self.config.RESULTS_CSV))
         self.logger.info('Done.')
-
+    
+    def test(self):
+        self.logger.info('='*5 + 'TEST' + '='*5)
+        # read in dev datasets
+        raw_df = pd.read_csv(self.config.TEST_CSV, encoding="utf-8")
+        # xs1, xs2 = map(list, zip(*[tuple(row['Text'].split('\t')) for idx, row in raw_df.iterrows()]))
+        xs1, xs2 = map(list, zip(*[(row['Text1 Translation'], row['Text2 Translation']) for idx, row in raw_df.iterrows()]))
+        self.logger.info('Data loaded.')
+        # model to predict
+        ys_= self.model.predict(xs1, xs2)
+        # Submission file has two columns: 'PairID' and 'Pred_Score'
+        raw_df['Pred_Score'] = ys_
+        raw_df[['PairID', 'Pred_Score']].to_csv(
+            self.config.RESULTS_CSV,
+            index=False,
+            encoding="utf-8"
+            )
+        self.logger.info('Results saved as {}.'.format(self.config.RESULTS_CSV))
+        self.logger.info('Done.')
+    
 def main():
     sr = SR()
     sr.dev()

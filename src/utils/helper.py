@@ -47,6 +47,6 @@ def get_model(config):
         case "sentence-transformers-translation":
             return sentence_transformers_translation.Model(config.model_name, config.tgt_lan, config.translate_lang)
         case 'amr-translation':
-            return amr_translation.AMR(config.tgt_lan, config.translate_lang)
+            return amr_translation.AMR(config, config.tgt_lan, config.translate_lang)
         case _:
             raise NotImplementedError

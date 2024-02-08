@@ -47,7 +47,8 @@ class Config(object):
         self.LAN_PATH = os.path.join(self.TRACK_PATH, self.tgt_lan)
         self.TRAIN_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_train.csv')
         # self.DEV_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_dev.csv')
-        self.DEV_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_train.csv')
+        self.DEV_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_dev.csv')
+        self.TEST_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_test.csv')
         self.LOG_PATH = os.path.join(
             self.RESOURCE_PATH, 'log', self.track, self.tgt_lan, self.method, str(self.seed)
             )
