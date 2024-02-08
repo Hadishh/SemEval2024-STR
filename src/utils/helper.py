@@ -9,8 +9,7 @@ __email__ = 'Email'
 import sys
 import logging
 # private
-from src.methods import base, sentence_transformers
-
+from src.methods import base, sentence_transformers, amr, sentence_transformers_translation, amr_translation
 
 def str2bool(v):
     """Method to map string to bool for argument parser"""
@@ -43,5 +42,11 @@ def get_model(config):
             return base.Model()
         case 'sentence-transformers':
             return sentence_transformers.Model(config.model_name)
+        case 'amr':
+            return amr.AMR()
+        case "sentence-transformers-translation":
+            return sentence_transformers_translation.Model(config.model_name, config.tgt_lan, config.translate_lang)
+        case 'amr-translation':
+            return amr_translation.AMR(config.tgt_lan, config.translate_lang)
         case _:
             raise NotImplementedError

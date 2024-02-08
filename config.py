@@ -17,12 +17,14 @@ def init_args():
     # tracks
     parser.add_argument('--track', type=str, default='a', choices=['a', 'b', 'c'])
     # target languages
-    parser.add_argument('--tgt_lan', type=str, default='eng', choices=['eng', "arq", "esp", "ary", "hin", "pan", "arb", "kin", "ind", "hau", "amh", "afr"])
+    parser.add_argument('--tgt_lan', type=str, default='eng', choices=['eng', "arq", "esp", "ary", "hin", "pan", "arb", "kin", "ind", "hau", "amh", "afr", "mar", "tel"])
     # method
     # base for the official baseline method
-    parser.add_argument('--method', type=str, default='base', choices=['base', "sentence-transformers"])
+    parser.add_argument('--method', type=str, default='base', choices=['base', "sentence-transformers", "amr", "sentence-transformers-translation", "amr-translation"])
     #sentence transformer model name
     parser.add_argument("--model_name", type=str, default="distiluse-base-multilingual-cased-v2")
+
+    parser.add_argument("--translate_lang", type=str, default="eng", choices=["de", 'eng', "arq", "esp", "ary", "hin", "pan", "arb", "kin", "ind", "hau", "amh", "afr", "mar", "tel"])
     # save as argparse space
     return parser.parse_known_args()[0]
 
@@ -44,7 +46,8 @@ class Config(object):
         self.TRACK_PATH = os.path.join(self.DATA_PATH, self.track)
         self.LAN_PATH = os.path.join(self.TRACK_PATH, self.tgt_lan)
         self.TRAIN_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_train.csv')
-        self.DEV_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_dev.csv')
+        # self.DEV_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_dev.csv')
+        self.DEV_CSV = os.path.join(self.LAN_PATH, f'{self.tgt_lan}_train.csv')
         self.LOG_PATH = os.path.join(
             self.RESOURCE_PATH, 'log', self.track, self.tgt_lan, self.method, str(self.seed)
             )
